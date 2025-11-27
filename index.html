@@ -3,90 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YoshuaNew</title>
+<title>YoshuaNew - MEME OVERLOAD</title>
 <style>
 * {margin:0; padding:0; box-sizing:border-box;}
-html, body {overflow:hidden; height:100%;}
+html, body {overflow:hidden; height:100%; font-family: 'Arial', sans-serif;}
 body {
     background:#000;
-    font-family:'Arial', sans-serif;
     color:#fff;
     display:flex;
     justify-content:center;
     align-items:center;
     perspective:1000px;
 }
-.container {text-align:center; width:100%; max-width:800px; transform-style:preserve-3d; position:relative; z-index:2;}
+.container {text-align:center; width:100%; max-width:900px; transform-style:preserve-3d; position:relative; z-index:2;}
 .click-overlay {
     position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95);
     display:flex; justify-content:center; align-items:center; z-index:10; backdrop-filter:blur(25px);
     transition: all 0.8s cubic-bezier(0.23,1,0.32,1);
 }
 .click-button {
-    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 25%, #3b82f6 50%, #06b6d4 75%, #ffffff 100%);
-    background-size:300% 300%;
-    color:white;
-    border:none; padding:25px 60px; font-size:32px; border-radius:25px; cursor:pointer;
-    transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
-    box-shadow:0 0 50px rgba(139,92,246,0.6),0 0 100px rgba(59,130,246,0.4),inset 0 0 20px rgba(255,255,255,0.1);
-    font-weight:800; letter-spacing:3px; backdrop-filter:blur(20px); border:2px solid rgba(255,255,255,0.15); position:relative; overflow:hidden; transform-style:preserve-3d; animation:gradientShift 3s ease infinite;
+    background: linear-gradient(135deg,#ff0055,#ffdd00,#00ffaa,#ffffff);
+    background-size:300% 300%; color:white; border:none; padding:25px 60px; font-size:32px;
+    border-radius:25px; cursor:pointer; transition: all 0.6s; box-shadow:0 0 50px #fff;
+    font-weight:800; letter-spacing:3px; position:relative; overflow:hidden; transform-style:preserve-3d;
+    animation: gradientShift 3s ease infinite;
 }
-.click-button::before {
-    content:''; position:absolute; top:0; left:-100%; width:100%; height:100%;
-    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-    transition:left 0.6s ease;
-}
-.click-button:hover::before {left:100%;}
-.click-button:hover {
-    transform:scale(1.1) rotateX(5deg) rotateY(5deg) translateZ(20px);
-    box-shadow:0 0 80px rgba(139,92,246,0.8),0 0 150px rgba(59,130,246,0.6),0 0 200px rgba(6,182,212,0.4), inset 0 0 30px rgba(255,255,255,0.2);
-    animation-duration:1.5s;
-}
+.click-button:hover{transform:scale(1.1);}
 @keyframes gradientShift {0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
-.hidden-audio{position:absolute;opacity:0; pointer-events:none;}
-.bio-content{opacity:0; transition: all 1.2s cubic-bezier(0.23,1,0.32,1); max-width:700px; transform-style:preserve-3d; transform:translateZ(50px); margin:0 auto;}
+.bio-content{opacity:0; transition: all 1.2s; max-width:700px; transform-style:preserve-3d; transform:translateZ(50px); margin:0 auto;}
 .bio-content.visible{opacity:1; animation:contentAppear 1.5s ease-out;}
-@keyframes contentAppear {0%{opacity:0; transform:translateY(50px) translateZ(-100px) rotateX(15deg);}100%{opacity:1; transform:translateY(0) translateZ(50px) rotateX(0);}}
-.avatar-container{position:relative; width:180px; height:180px; margin:0 auto 30px; transform-style:preserve-3d; transition:transform 0.8s cubic-bezier(0.23,1,0.32,1);}
+@keyframes contentAppear {0%{opacity:0; transform:translateY(50px);}100%{opacity:1; transform:translateY(0);}}
+.avatar-container{position:relative; width:180px; height:180px; margin:0 auto 30px; transition:transform 0.8s;}
 .avatar-container:hover{transform:rotateY(10deg) rotateX(-5deg) scale(1.05);}
-.avatar {
-    width:100%; height:100%; border-radius:50%; border:3px solid transparent;
-    background: url('OsmiumStudio_avatar_gradient.png') center/cover no-repeat;
-    box-shadow:0 0 50px rgba(139,92,246,0.5),0 0 100px rgba(59,130,246,0.3), inset 0 0 30px rgba(255,255,255,0.1);
-    display:flex; align-items:center; justify-content:center; color:white; font-size:24px; font-weight:bold; transition:all 0.6s cubic-bezier(0.23,1,0.32,1);
-}
-.avatar:hover{box-shadow:0 0 80px rgba(139,92,246,0.7),0 0 150px rgba(59,130,246,0.5), inset 0 0 40px rgba(255,255,255,0.2); transform:scale(1.05);}
-.username {font-size:48px; margin-bottom:20px; background: linear-gradient(135deg,#8b5cf6,#3b82f6,#06b6d4,#ffffff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-weight:900; text-shadow:0 0 30px rgba(139,92,246,0.5); letter-spacing:2px; transform-style:preserve-3d; transition:transform 0.6s cubic-bezier(0.23,1,0.32,1);}
-.username:hover{transform:translateZ(20px) scale(1.05);}
-.description {
-    font-size:18px; margin-bottom:40px; line-height:1.7; color:#e2e8f0; background:rgba(255,255,255,0.08); padding:30px; border-radius:20px;
-    border:1px solid rgba(139,92,246,0.3); backdrop-filter:blur(25px); box-shadow:0 8px 32px rgba(0,0,0,0.3), inset 0 0 20px rgba(255,255,255,0.05);
-    position:relative; overflow:hidden; transform-style:preserve-3d; transition:all 0.6s cubic-bezier(0.23,1,0.32,1);
-}
-.description::before {content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg, transparent, rgba(139,92,246,0.1), transparent); transition:left 0.8s ease;}
-.description:hover::before{left:100%;}
-.description:hover{transform:translateY(-10px) translateZ(15px) rotateX(2deg); box-shadow:0 15px 50px rgba(0,0,0,0.4); border-color:rgba(139,92,246,0.5);}
-.links {display:flex; justify-content:center; gap:25px; flex-wrap:wrap; margin-top:40px; transform-style:preserve-3d;}
-.link {
-    background: linear-gradient(135deg, rgba(139,92,246,0.9) 0%, rgba(59,130,246,0.9) 100%);
-    padding:18px 35px; border-radius:20px; transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
-    text-decoration:none; color:white; font-weight:700; border:2px solid rgba(255,255,255,0.2); backdrop-filter:blur(20px);
-    box-shadow:0 8px 32px rgba(139,92,246,0.3), inset 0 0 20px rgba(255,255,255,0.1); position:relative; overflow:hidden; transform-style:preserve-3d; font-size:16px; letter-spacing:1px;
-}
-.link::before {content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition:left 0.6s ease;}
-.link:hover::before{left:100%;}
-.link:hover {transform:translateY(-8px) translateZ(25px) rotateX(8deg) rotateY(5deg) scale(1.1); box-shadow:0 15px 50px rgba(139,92,246,0.5),0 0 80px rgba(59,130,246,0.3), inset 0 0 30px rgba(255,255,255,0.2); background:linear-gradient(135deg, rgba(167,139,250,0.95) 0%, rgba(96,165,250,0.95) 100%);}
+.avatar {width:100%; height:100%; border-radius:50%; background:url('OsmiumStudio_avatar_gradient.png') center/cover no-repeat; box-shadow:0 0 50px #fff;}
+.username {font-size:48px; margin-bottom:20px; background: linear-gradient(135deg,#ff0055,#ffdd00,#00ffaa,#ffffff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-weight:900; text-shadow:0 0 30px #fff; letter-spacing:2px;}
+.description {font-size:18px; margin-bottom:40px; line-height:1.7; color:#fff; background:rgba(255,255,255,0.05); padding:20px; border-radius:20px; position:relative; overflow:hidden;}
+.links {display:flex; justify-content:center; gap:25px; flex-wrap:wrap; margin-top:20px;}
+.link {background:rgba(255,255,255,0.1); padding:15px 25px; border-radius:15px; text-decoration:none; color:white; font-weight:700; transition:0.5s;}
+.link:hover{background:rgba(255,255,255,0.3); transform:scale(1.1);}
+.meme {position:absolute; font-size:20px; color:#ff0; animation:floatMeme 5s infinite; pointer-events:none;}
+@keyframes floatMeme {0%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-50px) rotate(180deg);}100%{transform:translateY(0) rotate(360deg);}}
 </style>
 </head>
 <body>
+
 <div class="click-overlay" id="clickOverlay">
-    <button class="click-button" id="clickButton">CLICK</button>
+    <button class="click-button" id="clickButton">CLICK TO MEME!</button>
 </div>
 
 <div class="container">
     <div class="bio-content" id="bioContent">
         <div class="avatar-container"><div class="avatar"></div></div>
-        <h1 class="username">YoshuaNew</h1>
+        <h1 class="username">YoshuaNew 😂</h1>
         <div class="description" id="description"></div>
         <div class="links">
             <a href="https://www.roblox.com/games/139755066781834/1-2-OsmiumHvH" target="_blank" class="link">Roblox Game</a>
@@ -108,17 +76,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const bioContent = document.getElementById('bioContent');
     const description = document.getElementById('description');
 
-    const textContent = `Discord: @yoshuanew
-Telegram: @YoshuaNew
-Fun Fact: I love coding at night.
-City: Ufa
-Country: Russia
-Gaming Nick: YoshuaNew
-Roblox Info: Check above links.
-Random Fact: Coffee is my fuel.
-Trivia: Cats are secretly plotting.
+    const textContent = `🤣 Discord: @yoshuanew
+😂 Telegram: @YoshuaNew
+💀 Fun Fact: I once coded a cat simulator
+🤡 City: Ufa
+🇷🇺 Country: Russia
+🎮 Gaming Nick: YoshuaNew
+🐸 Meme Fact: Doge > Cat
+🔥 Random: I put ketchup on pizza
+🤣 Trivia: Fortnite dances in real life
+💀 Misc: Sleep is for the weak
 `;
+
     let i = 0;
+
+    function addRandomMeme() {
+        const memeTexts = ["😂", "🤣", "💀", "🤡", "🐸", "🔥", "💩", "👀"];
+        const meme = document.createElement('div');
+        meme.className = 'meme';
+        meme.style.left = Math.random()*90 + 'vw';
+        meme.style.top = Math.random()*90 + 'vh';
+        meme.style.fontSize = (15 + Math.random()*30) + 'px';
+        meme.innerText = memeTexts[Math.floor(Math.random()*memeTexts.length)];
+        document.body.appendChild(meme);
+        setTimeout(()=>{meme.remove()}, 5000);
+    }
 
     clickButton.addEventListener('click', function() {
         audioPlayer.volume = 0.7;
@@ -129,6 +111,7 @@ Trivia: Cats are secretly plotting.
             clickOverlay.style.display = 'none';
             bioContent.classList.add('visible');
             typeWriter();
+            setInterval(addRandomMeme, 500);
         }, 800);
     });
 
@@ -136,7 +119,7 @@ Trivia: Cats are secretly plotting.
         if(i < textContent.length) {
             description.innerHTML += textContent.charAt(i);
             i++;
-            setTimeout(typeWriter, 40);
+            setTimeout(typeWriter, 50 + Math.random()*100); // печать с разной скоростью для эффекта хаоса
         }
     }
 
