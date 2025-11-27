@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YoshuaNew - MEME OVERLOAD</title>
+<title>ПОЛНЫЙ ХАОС АХАХАХАХ</title>
 <style>
 * {margin:0; padding:0; box-sizing:border-box;}
 html, body {overflow:hidden; height:100%; font-family: 'Arial', sans-serif;}
@@ -15,12 +15,15 @@ body {
     align-items:center;
     perspective:1000px;
 }
+
 .container {text-align:center; width:100%; max-width:900px; transform-style:preserve-3d; position:relative; z-index:2;}
+
 .click-overlay {
     position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95);
     display:flex; justify-content:center; align-items:center; z-index:10; backdrop-filter:blur(25px);
     transition: all 0.8s cubic-bezier(0.23,1,0.32,1);
 }
+
 .click-button {
     background: linear-gradient(135deg,#ff0055,#ffdd00,#00ffaa,#ffffff);
     background-size:300% 300%; color:white; border:none; padding:25px 60px; font-size:32px;
@@ -28,44 +31,62 @@ body {
     font-weight:800; letter-spacing:3px; position:relative; overflow:hidden; transform-style:preserve-3d;
     animation: gradientShift 3s ease infinite;
 }
+
 .click-button:hover{transform:scale(1.1);}
+
 @keyframes gradientShift {0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
+
 .bio-content{opacity:0; transition: all 1.2s; max-width:700px; transform-style:preserve-3d; transform:translateZ(50px); margin:0 auto;}
 .bio-content.visible{opacity:1; animation:contentAppear 1.5s ease-out;}
+
 @keyframes contentAppear {0%{opacity:0; transform:translateY(50px);}100%{opacity:1; transform:translateY(0);}}
+
 .avatar-container{position:relative; width:180px; height:180px; margin:0 auto 30px; transition:transform 0.8s;}
 .avatar-container:hover{transform:rotateY(10deg) rotateX(-5deg) scale(1.05);}
-.avatar {width:100%; height:100%; border-radius:50%; background:url('OsmiumStudio_avatar_gradient.png') center/cover no-repeat; box-shadow:0 0 50px #fff;}
+
+.avatar {width:100%; height:100%; border-radius:50%; background:linear-gradient(45deg, #ff0000, #ffff00, #00ff00); box-shadow:0 0 50px #fff;}
+
 .username {font-size:48px; margin-bottom:20px; background: linear-gradient(135deg,#ff0055,#ffdd00,#00ffaa,#ffffff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-weight:900; text-shadow:0 0 30px #fff; letter-spacing:2px;}
+
 .description {font-size:18px; margin-bottom:40px; line-height:1.7; color:#fff; background:rgba(255,255,255,0.05); padding:20px; border-radius:20px; position:relative; overflow:hidden;}
+
 .links {display:flex; justify-content:center; gap:25px; flex-wrap:wrap; margin-top:20px;}
+
 .link {background:rgba(255,255,255,0.1); padding:15px 25px; border-radius:15px; text-decoration:none; color:white; font-weight:700; transition:0.5s;}
 .link:hover{background:rgba(255,255,255,0.3); transform:scale(1.1);}
-.meme {position:absolute; font-size:20px; color:#ff0; animation:floatMeme 5s infinite; pointer-events:none;}
-@keyframes floatMeme {0%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-50px) rotate(180deg);}100%{transform:translateY(0) rotate(360deg);}}
+
+/* СТИЛИ ДЛЯ ПОЛНОГО ХАОСА */
+.meme {position:absolute; font-size:20px; pointer-events:none; z-index:1;}
+.bomb {position:absolute; font-size:30px; pointer-events:none; z-index:1; animation:bombExplode 2s infinite;}
+
+@keyframes floatMeme {0%{transform:translateY(0) rotate(0deg) scale(1);}50%{transform:translateY(-100px) rotate(180deg) scale(1.5);}100%{transform:translateY(0) rotate(360deg) scale(1);}}
+@keyframes bombExplode {0%{transform:scale(1); opacity:1;}50%{transform:scale(3); opacity:0.7;}100%{transform:scale(1); opacity:0;}}
+
+.chaos-text {position:absolute; font-size:24px; color:#ff0; font-weight:900; pointer-events:none; animation:chaosMove 3s infinite;}
+@keyframes chaosMove {0%{transform:translate(0,0) rotate(0deg);}25%{transform:translate(100px,-50px) rotate(90deg);}50%{transform:translate(-50px,100px) rotate(180deg);}75%{transform:translate(80px,80px) rotate(270deg);}100%{transform:translate(0,0) rotate(360deg);}}
 </style>
 </head>
 <body>
 
 <div class="click-overlay" id="clickOverlay">
-    <button class="click-button" id="clickButton">CLICK TO MEME!</button>
+    <button class="click-button" id="clickButton">НАЖМИ ДЛЯ ХАОСА! 💥</button>
 </div>
 
 <div class="container">
     <div class="bio-content" id="bioContent">
         <div class="avatar-container"><div class="avatar"></div></div>
-        <h1 class="username">YoshuaNew 😂</h1>
+        <h1 class="username">ХАОС МОДЕ АХАХАХ 🤣💥</h1>
         <div class="description" id="description"></div>
         <div class="links">
-            <a href="https://www.roblox.com/games/139755066781834/1-2-OsmiumHvH" target="_blank" class="link">Roblox Game</a>
-            <a href="https://www.roblox.com/communities/823010003/Osmium-Studio#!/about" target="_blank" class="link">Group</a>
-            <a href="https://www.tiktok.com/@yoshhhua" target="_blank" class="link">TikTok</a>
+            <a href="#" class="link">АХАХАХАХ</a>
+            <a href="#" class="link">ВЗРЫВЫ 💣</a>
+            <a href="#" class="link">ХАОС 😂</a>
         </div>
     </div>
 </div>
 
 <audio class="hidden-audio" loop id="audioPlayer">
-    <source src="dabbackwood — ghostbless.mp3" type="audio/mpeg">
+    <source src="https://www.soundjay.com/button/beep-07.wav" type="audio/wav">
 </audio>
 
 <script>
@@ -76,30 +97,53 @@ document.addEventListener('DOMContentLoaded', function() {
     const bioContent = document.getElementById('bioContent');
     const description = document.getElementById('description');
 
-    const textContent = `🤣 Discord: @yoshuanew
-😂 Telegram: @YoshuaNew
-💀 Fun Fact: I once coded a cat simulator
-🤡 City: Ufa
-🇷🇺 Country: Russia
-🎮 Gaming Nick: YoshuaNew
-🐸 Meme Fact: Doge > Cat
-🔥 Random: I put ketchup on pizza
-🤣 Trivia: Fortnite dances in real life
-💀 Misc: Sleep is for the weak
-`;
+    const textContent = `🤣 АХАХАХАХАХАХХАХАХ
+💥 БОМБЫ ВЗРЫВАЮТСЯ
+😂 КОТ БЕГАЕТ КРУГОМ
+🤡 ВСЕ СЛОМАЛОСЬ
+💀 ПОМОГИТЕ АХАХАХ
+🔥 ОГНЕННЫЙ ХАОС
+🐸 ЖАБА ТАНЦУЕТ
+💩 ВСЕ ЛЕТИТ В ТаРТАРАРЫ
+👀 ЧТО ПРОИСХОДИТ???`;
 
     let i = 0;
 
     function addRandomMeme() {
-        const memeTexts = ["😂", "🤣", "💀", "🤡", "🐸", "🔥", "💩", "👀"];
+        const memeTexts = ["😂", "🤣", "💀", "🤡", "🐸", "🔥", "💩", "👀", "💥", "🚀"];
         const meme = document.createElement('div');
         meme.className = 'meme';
         meme.style.left = Math.random()*90 + 'vw';
         meme.style.top = Math.random()*90 + 'vh';
-        meme.style.fontSize = (15 + Math.random()*30) + 'px';
+        meme.style.fontSize = (20 + Math.random()*40) + 'px';
+        meme.style.color = `hsl(${Math.random()*360}, 100%, 50%)`;
         meme.innerText = memeTexts[Math.floor(Math.random()*memeTexts.length)];
+        meme.style.animation = `floatMeme ${3 + Math.random()*5}s infinite`;
         document.body.appendChild(meme);
-        setTimeout(()=>{meme.remove()}, 5000);
+        setTimeout(()=>{meme.remove()}, 8000);
+    }
+
+    function addBomb() {
+        const bomb = document.createElement('div');
+        bomb.className = 'bomb';
+        bomb.style.left = Math.random()*90 + 'vw';
+        bomb.style.top = Math.random()*90 + 'vh';
+        bomb.style.fontSize = (25 + Math.random()*50) + 'px';
+        bomb.innerText = "💣";
+        document.body.appendChild(bomb);
+        setTimeout(()=>{bomb.remove()}, 2000);
+    }
+
+    function addChaosText() {
+        const chaosWords = ["АХАХАХ", "ВЗРЫВ!", "ХАОС!", "ПОМОГИТЕ!", "КОТ!", "БОМБА!", "МЕГАМЕШНО!"];
+        const chaosText = document.createElement('div');
+        chaosText.className = 'chaos-text';
+        chaosText.style.left = Math.random()*80 + 'vw';
+        chaosText.style.top = Math.random()*80 + 'vh';
+        chaosText.style.color = `hsl(${Math.random()*360}, 100%, 50%)`;
+        chaosText.innerText = chaosWords[Math.floor(Math.random()*chaosWords.length)];
+        document.body.appendChild(chaosText);
+        setTimeout(()=>{chaosText.remove()}, 3000);
     }
 
     clickButton.addEventListener('click', function() {
@@ -111,7 +155,9 @@ document.addEventListener('DOMContentLoaded', function() {
             clickOverlay.style.display = 'none';
             bioContent.classList.add('visible');
             typeWriter();
-            setInterval(addRandomMeme, 500);
+            setInterval(addRandomMeme, 300);
+            setInterval(addBomb, 500);
+            setInterval(addChaosText, 800);
         }, 800);
     });
 
@@ -119,15 +165,20 @@ document.addEventListener('DOMContentLoaded', function() {
         if(i < textContent.length) {
             description.innerHTML += textContent.charAt(i);
             i++;
-            setTimeout(typeWriter, 50 + Math.random()*100); // печать с разной скоростью для эффекта хаоса
+            setTimeout(typeWriter, 30 + Math.random()*80);
         }
     }
 
     document.addEventListener('mousemove', function(e) {
-        const x = (e.clientX / window.innerWidth - 0.5) * 20;
-        const y = (e.clientY / window.innerHeight - 0.5) * 20;
-        document.querySelector('.container').style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+        const x = (e.clientX / window.innerWidth - 0.5) * 40;
+        const y = (e.clientY / window.innerHeight - 0.5) * 40;
+        document.querySelector('.container').style.transform = `rotateY(${x}deg) rotateX(${-y}deg) scale(${1 + Math.abs(x)/100})`;
     });
+
+    // ДОБАВЛЯЕМ СЛУЧАЙНЫЕ ДВИЖЕНИЯ ФОНА
+    setInterval(() => {
+        document.body.style.background = `hsl(${Math.random()*360}, 70%, 10%)`;
+    }, 1000);
 });
 </script>
 </body>
