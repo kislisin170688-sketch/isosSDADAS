@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YoshuaNew</title>
+<style>
+* {margin:0; padding:0; box-sizing:border-box;}
+html, body {overflow:hidden; height:100%;}
+body {
+    background:#000;
+    font-family:'Arial', sans-serif;
+    color:#fff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    perspective:1000px;
+}
+.container {text-align:center; width:100%; max-width:800px; transform-style:preserve-3d; position:relative; z-index:2;}
+.click-overlay {
+    position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.95);
+    display:flex; justify-content:center; align-items:center; z-index:10; backdrop-filter:blur(25px);
+    transition: all 0.8s cubic-bezier(0.23,1,0.32,1);
+}
+.click-button {
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 25%, #3b82f6 50%, #06b6d4 75%, #ffffff 100%);
+    background-size:300% 300%;
+    color:white;
+    border:none; padding:25px 60px; font-size:32px; border-radius:25px; cursor:pointer;
+    transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
+    box-shadow:0 0 50px rgba(139,92,246,0.6),0 0 100px rgba(59,130,246,0.4),inset 0 0 20px rgba(255,255,255,0.1);
+    font-weight:800; letter-spacing:3px; backdrop-filter:blur(20px); border:2px solid rgba(255,255,255,0.15); position:relative; overflow:hidden; transform-style:preserve-3d; animation:gradientShift 3s ease infinite;
+}
+.click-button::before {
+    content:''; position:absolute; top:0; left:-100%; width:100%; height:100%;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition:left 0.6s ease;
+}
+.click-button:hover::before {left:100%;}
+.click-button:hover {
+    transform:scale(1.1) rotateX(5deg) rotateY(5deg) translateZ(20px);
+    box-shadow:0 0 80px rgba(139,92,246,0.8),0 0 150px rgba(59,130,246,0.6),0 0 200px rgba(6,182,212,0.4), inset 0 0 30px rgba(255,255,255,0.2);
+    animation-duration:1.5s;
+}
+@keyframes gradientShift {0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
+.hidden-audio{position:absolute;opacity:0; pointer-events:none;}
+.bio-content{opacity:0; transition: all 1.2s cubic-bezier(0.23,1,0.32,1); max-width:700px; transform-style:preserve-3d; transform:translateZ(50px); margin:0 auto;}
+.bio-content.visible{opacity:1; animation:contentAppear 1.5s ease-out;}
+@keyframes contentAppear {0%{opacity:0; transform:translateY(50px) translateZ(-100px) rotateX(15deg);}100%{opacity:1; transform:translateY(0) translateZ(50px) rotateX(0);}}
+.avatar-container{position:relative; width:180px; height:180px; margin:0 auto 30px; transform-style:preserve-3d; transition:transform 0.8s cubic-bezier(0.23,1,0.32,1);}
+.avatar-container:hover{transform:rotateY(10deg) rotateX(-5deg) scale(1.05);}
+.avatar {
+    width:100%; height:100%; border-radius:50%; border:3px solid transparent;
+    background: url('OsmiumStudio_avatar_gradient.png') center/cover no-repeat;
+    box-shadow:0 0 50px rgba(139,92,246,0.5),0 0 100px rgba(59,130,246,0.3), inset 0 0 30px rgba(255,255,255,0.1);
+    display:flex; align-items:center; justify-content:center; color:white; font-size:24px; font-weight:bold; transition:all 0.6s cubic-bezier(0.23,1,0.32,1);
+}
+.avatar:hover{box-shadow:0 0 80px rgba(139,92,246,0.7),0 0 150px rgba(59,130,246,0.5), inset 0 0 40px rgba(255,255,255,0.2); transform:scale(1.05);}
+.username {font-size:48px; margin-bottom:20px; background: linear-gradient(135deg,#8b5cf6,#3b82f6,#06b6d4,#ffffff); -webkit-background-clip:text; -webkit-text-fill-color:transparent; font-weight:900; text-shadow:0 0 30px rgba(139,92,246,0.5); letter-spacing:2px; transform-style:preserve-3d; transition:transform 0.6s cubic-bezier(0.23,1,0.32,1);}
+.username:hover{transform:translateZ(20px) scale(1.05);}
+.description {
+    font-size:18px; margin-bottom:40px; line-height:1.7; color:#e2e8f0; background:rgba(255,255,255,0.08); padding:30px; border-radius:20px;
+    border:1px solid rgba(139,92,246,0.3); backdrop-filter:blur(25px); box-shadow:0 8px 32px rgba(0,0,0,0.3), inset 0 0 20px rgba(255,255,255,0.05);
+    position:relative; overflow:hidden; transform-style:preserve-3d; transition:all 0.6s cubic-bezier(0.23,1,0.32,1);
+}
+.description::before {content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg, transparent, rgba(139,92,246,0.1), transparent); transition:left 0.8s ease;}
+.description:hover::before{left:100%;}
+.description:hover{transform:translateY(-10px) translateZ(15px) rotateX(2deg); box-shadow:0 15px 50px rgba(0,0,0,0.4); border-color:rgba(139,92,246,0.5);}
+.links {display:flex; justify-content:center; gap:25px; flex-wrap:wrap; margin-top:40px; transform-style:preserve-3d;}
+.link {
+    background: linear-gradient(135deg, rgba(139,92,246,0.9) 0%, rgba(59,130,246,0.9) 100%);
+    padding:18px 35px; border-radius:20px; transition: all 0.6s cubic-bezier(0.23,1,0.32,1);
+    text-decoration:none; color:white; font-weight:700; border:2px solid rgba(255,255,255,0.2); backdrop-filter:blur(20px);
+    box-shadow:0 8px 32px rgba(139,92,246,0.3), inset 0 0 20px rgba(255,255,255,0.1); position:relative; overflow:hidden; transform-style:preserve-3d; font-size:16px; letter-spacing:1px;
+}
+.link::before {content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent); transition:left 0.6s ease;}
+.link:hover::before{left:100%;}
+.link:hover {transform:translateY(-8px) translateZ(25px) rotateX(8deg) rotateY(5deg) scale(1.1); box-shadow:0 15px 50px rgba(139,92,246,0.5),0 0 80px rgba(59,130,246,0.3), inset 0 0 30px rgba(255,255,255,0.2); background:linear-gradient(135deg, rgba(167,139,250,0.95) 0%, rgba(96,165,250,0.95) 100%);}
+</style>
+</head>
+<body>
+<div class="click-overlay" id="clickOverlay">
+    <button class="click-button" id="clickButton">CLICK</button>
+</div>
+
+<div class="container">
+    <div class="bio-content" id="bioContent">
+        <div class="avatar-container"><div class="avatar"></div></div>
+        <h1 class="username">YoshuaNew</h1>
+        <div class="description" id="description"></div>
+        <div class="links">
+            <a href="https://www.roblox.com/games/139755066781834/1-2-OsmiumHvH" target="_blank" class="link">Roblox Game</a>
+            <a href="https://www.roblox.com/communities/823010003/Osmium-Studio#!/about" target="_blank" class="link">Group</a>
+            <a href="https://www.tiktok.com/@yoshhhua" target="_blank" class="link">TikTok</a>
+        </div>
+    </div>
+</div>
+
+<audio class="hidden-audio" loop id="audioPlayer">
+    <source src="dabbackwood — ghostbless.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const clickOverlay = document.getElementById('clickOverlay');
+    const clickButton = document.getElementById('clickButton');
+    const audioPlayer = document.getElementById('audioPlayer');
+    const bioContent = document.getElementById('bioContent');
+    const description = document.getElementById('description');
+
+    const textContent = `Discord: @yoshuanew
+Telegram: @YoshuaNew
+Fun Fact: I love coding at night.
+City: Ufa
+Country: Russia
+Gaming Nick: YoshuaNew
+Roblox Info: Check above links.
+Random Fact: Coffee is my fuel.
+Trivia: Cats are secretly plotting.
+`;
+    let i = 0;
+
+    clickButton.addEventListener('click', function() {
+        audioPlayer.volume = 0.7;
+        audioPlayer.play();
+        clickOverlay.style.opacity = '0';
+        clickOverlay.style.backdropFilter = 'blur(0px)';
+        setTimeout(() => {
+            clickOverlay.style.display = 'none';
+            bioContent.classList.add('visible');
+            typeWriter();
+        }, 800);
+    });
+
+    function typeWriter() {
+        if(i < textContent.length) {
+            description.innerHTML += textContent.charAt(i);
+            i++;
+            setTimeout(typeWriter, 40);
+        }
+    }
+
+    document.addEventListener('mousemove', function(e) {
+        const x = (e.clientX / window.innerWidth - 0.5) * 20;
+        const y = (e.clientY / window.innerHeight - 0.5) * 20;
+        document.querySelector('.container').style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+    });
+});
+</script>
+</body>
+</html>
